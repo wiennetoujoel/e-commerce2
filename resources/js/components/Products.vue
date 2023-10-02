@@ -13,10 +13,10 @@
             </thead>
             <tbody>
                 <tr v-for="(product, index) in products" :key="index">
-                    <td>{{ product.name }}</td>
-                    <td>{{ product.desc }}</td>
-                    <td>{{ product.stock }}</td>
-                    <td>{{ product.price }}</td>
+                    <td>{{product.name}}</td>
+                    <td>{{product.desc}}</td>
+                    <td>{{product.stock}}</td>
+                    <td>{{product.price}}</td>
                     <td>
                         <button @click="substractQuantity(index)">-</button>
                         <input
@@ -45,38 +45,18 @@
 export default {
     emits: ["add-to-cart"],
 
+    props:{
+        products :{
+            type : Array,
+            default : ()=>{
+                return[]
+            }
+        }
+    },
+
     data() {
         return {
-            products: [
-                {
-                    name: "Samsung",
-                    desc: "Harga medium, Kualitas Top",
-                    stock: 5,
-                    price: 750,
-                    quantity: 0,
-                },
-                {
-                    name: "Apple",
-                    desc: " Harga Mehong,  Kualitas Top",
-                    stock: 10,
-                    price: 1000,
-                    quantity: 0,
-                },
-                {
-                    name: "Xiaomi",
-                    desc: "Harga murmer, Kualitas Blouggg",
-                    stock: 1000,
-                    price: 500,
-                    quantity: 0,
-                },
-                {
-                    name: " oddo ",
-                    desc: "Harga mayan lah, Kualitas dahlah",
-                    stock: 1000,
-                    price: 250,
-                    quantity: 0,
-                },
-            ],
+            
         };
     },
 
@@ -105,14 +85,14 @@ export default {
 
         addToCart(index) {
             console.log(index);
-            console.log(this.products[index]);
+            console.log(`produk yang ditambahkan adalah ${JSON.stringify(this.products[index])}`);
             const selectedProduct = this.products[index];
             if (
                 selectedProduct.quantity > 0 &&
                 selectedProduct.quantity <= selectedProduct.stock
             ) {
                 console.log(selectedProduct);
-                this.$emit("add-to-cart", { ...selectedProduct });
+                this.$emit("add-to-cart", { ...selectedProduct }, this.products);
                 selectedProduct.stock -= selectedProduct.quantity;
             } else {
                 alert("Barang tidak cukup atau sudah habis");
@@ -120,6 +100,7 @@ export default {
             console.log(
                 `Barang yang dipesan adalah ${selectedProduct.name} dengan jumlah pesanan ${selectedProduct.quantity}, sisa stok ${selectedProduct.stock}`
             );
+            console.log(`cek apakah list masih terkirim semua dengan ${JSON.stringify(this.products)}`)
         },
     },
 };

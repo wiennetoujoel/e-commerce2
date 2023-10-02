@@ -10,6 +10,7 @@
                     <th>Accumulation</th>
                     <th></th>
                     <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -23,6 +24,7 @@
                             Delete
                         </button>
                     </td>
+                    <td>indeksnya {{ index }}</td>
                 </tr>
             </tbody>
             <tfoot>
@@ -37,6 +39,9 @@
 
 <script>
 export default {
+    emits:[
+        'delete-item'
+    ],
     props: {
         cartData: {
             type: Array,
@@ -61,15 +66,11 @@ export default {
 
     methods: {
         deleteItem(index) {
-            const deletedItem = this.cardData[index];
-            this.cardData.splice(index, 1);
+            const deletedItem = this.cartData[index];
+            console.log(`list produk tercatat di cart adalah ${this.products}`)
+            this.cartData.splice(index, 1);
 
-            // Kembalikan jumlah quantity ke stok produk
-            const product = deletedItem.product;
-            const productIndex = this.products.findIndex((p) => p === product);
-            if (productIndex !== -1) {
-                this.products[productIndex].stock += deletedItem.quantity;
-            }
+            this.$emit('delete-item', deletedItem, this.products)
         },
     },
 };
