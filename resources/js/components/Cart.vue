@@ -10,7 +10,7 @@
                     <th>Accumulation</th>
                     <th></th>
                     <th></th>
-                    <th></th>
+                   
                 </tr>
             </thead>
             <tbody>
@@ -24,7 +24,7 @@
                             Delete
                         </button>
                     </td>
-                    <td>indeksnya {{ index }}</td>
+                    
                 </tr>
             </tbody>
             <tfoot>
@@ -59,7 +59,7 @@ export default {
     computed: {
         checkout() {
             return this.cartData.reduce((sum, product) => {
-                return sum + product.price * product.quantity;
+                return sum += product.price * product.quantity;
             }, 0);
         },
     },
