@@ -2,15 +2,35 @@
     "data": [
         {
             "id": 1,
-            "name": "Air Mineral"
+            "name" : "Samsung",
+            "desc": "Harga medium, Kualitas Top",
+            "stock": 5,
+            "price": 750,
+            "quantity": 0
         },
         {
             "id": 2,
-            "name": "Permen"
+            "name": "Apple",
+            "desc": " Harga Mehong,  Kualitas Top",
+            "stock": 10,
+            "price": 1000,
+            "quantity": 0
         },
         {
             "id": 3,
-            "name": "Donat"
+            "name": "Xiaomi",
+            "desc": "Harga murmer, Kualitas Blouggg",
+            "stock": 1000,
+            "price": 500,
+            "quantity": 0
+        },
+        {
+            "id" : 4,
+            "name": " oddo ",
+            "desc": "Harga mayan lah, Kualitas dahlah",
+            "stock": 1000,
+            "price": 250,
+            "quantity": 0
         }
     ]
 }

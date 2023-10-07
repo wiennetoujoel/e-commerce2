@@ -1,8 +1,12 @@
 
 const getData = (state) => {
-    return state.data
+    return (state.data)
+}
+
+const getCart = (state) => {
+    return (state.cart)
 }
 
 export default {
-    getData
+    getData,getCart
 }

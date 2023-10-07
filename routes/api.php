@@ -23,3 +23,11 @@ Route::post('/postData', 'Mocking\Controllers\ExampleController@postData');
 Route::put('/putData', 'Mocking\Controllers\ExampleController@putData');
 Route::patch('/patchData', 'Mocking\Controllers\ExampleController@patchData');
 Route::delete('/deleteData/{id?}', 'Mocking\Controllers\ExampleController@deleteData');
+
+Route::get('/getAllCart', 'Mocking\Controllers\ExampleController@getCart');
+Route::patch('/increaseQuantity/{id}', 'Mocking\Controllers\ExampleController@increaseQuantity');
+Route::patch('/decreaseQuantity/{id}', 'Mocking\Controllers\ExampleController@decreaseQuantity');
+
+
+Route::post('/addToCartAction', 'Mocking\Controllers\ExampleController@addToCartAction');
+
