@@ -28,29 +28,31 @@
                         <button @click="increaseQuantity(product.id)">+</button>
                     </td>
                     <td>
-                        <button type="button" class="button" @click="addToCart">
+                        <button type="button" class="button" @click="addToCart(product.id)">
                             Add to Cart
                         </button>
                     </td>
                 </tr>
             </tbody>
         </table>
+        <ul>isi dari cart adalah {{ carts }}</ul>
         <button @click="goToCart">Go To Cart</button>
     </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
     computed: {
         ...mapGetters({
             products: "example/getData",
-            cart: "example/getCart",
+            carts: "example/getCart",
         }),
     },
     created() {
         this.$store.dispatch("example/getAllData");
+        this.$store.dispatch("example/getAllCart");
     },
     methods: {
        
@@ -59,7 +61,7 @@ export default {
             
             if (product && product.quantity < product.stock) {
                 this.$store.dispatch("example/increaseQuantity", {
-                    productId: productId,
+                    productId,
                     quantity: 1,
                 });
             }
@@ -72,7 +74,7 @@ export default {
 
             if (product && product.quantity > 0) {
                 this.$store.dispatch("example/decreaseQuantity", {
-                    productId: productId,
+                    productId,
                     quantity: 1,
                 });
             }
@@ -80,8 +82,15 @@ export default {
 
         addToCart(productId) {
             const product = this.products.find((p) => p.id === productId);
+            
+            
+            console.log(`isi dari cart.json adalah ${JSON.stringify(this.carts)}`)
+            console.log(`produk detected ${JSON.stringify(product)}`)
             if (product && product.quantity > 0) {
-                this.addToCartAction({ productId, quantity: product.quantity });
+                this.$store.dispatch("example/addToCartAction", {
+                    productId,
+                    quantity: product.quantity,
+                });
             }
         },
 

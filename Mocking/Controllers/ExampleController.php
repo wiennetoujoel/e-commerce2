@@ -30,11 +30,17 @@ class ExampleController extends Controller{
 		return response()->json($json);
 	}
 
+	public function addToCartACtion($id){
+		$path = base_path()."/Mocking/Json/success_post.json";
+		$json = json_decode(file_get_contents($path), true);
+		return response()->json($json);
+	}
 
-
-
-
-
+	public function deleteCart(){
+		$path = base_path()."/Mocking/Json/success_delete.json";
+		$json = json_decode(file_get_contents($path), true);
+		return response()->json($json);
+	}
 
 
 	public function postData(){

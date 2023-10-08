@@ -14,13 +14,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(product, index) in cartData" :key="index">
+                <tr v-for="product in carts" :key="product.id">
                     <td>{{ product.name }}</td>
                     <td>{{ product.price }}</td>
                     <td>{{ product.quantity }}</td>
                     <td>{{ product.price * product.quantity }}</td>
                     <td>
-                        <button class="button-71" @click="deleteItem(index)">
+                        <button class="button-71" @click="deleteItem(product.id)">
                             Delete
                         </button>
                     </td>
@@ -30,48 +30,38 @@
             <tfoot>
                 <tr>
                     <td colspan="3">Total</td>
-                    <td>USD {{ checkout }}</td>
+                    <td>USD </td>
                 </tr>
             </tfoot>
         </table>
+        <button type="button" @click="goHome">
+            Home
+        </button>
     </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
-    emits:[
-        'delete-item'
-    ],
-    props: {
-        cartData: {
-            type: Array,
-            default: () => {
-                return [];
-            },
-        },
-        products: {
-            type: Array,
-            default: () => {
-                return [];
-            },
-        },
-    },
+   
     computed: {
-        checkout() {
-            return this.cartData.reduce((sum, product) => {
-                return sum += product.price * product.quantity;
-            }, 0);
-        },
+        ...mapGetters({
+            products: "example/getData",
+            carts: "example/getCart",
+        }),
     },
 
     methods: {
-        deleteItem(index) {
-            const deletedItem = this.cartData[index];
-            console.log(`list produk tercatat di cart adalah ${this.products}`)
-            this.cartData.splice(index, 1);
+        deleteItem(productId) {
+            const product = this.products.find((p) => p.id === productId);
 
-            this.$emit('delete-item', deletedItem, this.products)
+            this.$store.dispatch('example/deleteCart', productId);
         },
+
+        goHome(){
+            this.$router.push({name:'products'})
+        }
     },
 };
 </script>

@@ -6,7 +6,7 @@ import ExampleComponent from './components/ExampleComponent.vue'
 const routes =[
     {
         path: '/cart',
-        name : "Cart",
+        name : "cart",
         component : Cart
     },
     {

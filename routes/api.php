@@ -29,5 +29,6 @@ Route::patch('/increaseQuantity/{id}', 'Mocking\Controllers\ExampleController@in
 Route::patch('/decreaseQuantity/{id}', 'Mocking\Controllers\ExampleController@decreaseQuantity');
 
 
-Route::post('/addToCartAction', 'Mocking\Controllers\ExampleController@addToCartAction');
+Route::post('/addToCartAction/{id}', 'Mocking\Controllers\ExampleController@addToCartAction');
+Route::delete('/deleteCart/{id}', 'Mocking\Controllers\ExampleController@deleteCart');
 

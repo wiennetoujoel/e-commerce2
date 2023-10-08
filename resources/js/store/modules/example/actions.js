@@ -9,26 +9,7 @@ const getAllData = async (context) => {
 const getAllCart = async (context) => {
     let response = await axios.get("api/getAllCart");
 
-    context.commit("UPDATE_DATA", response.cart);
-}
-
-
-const postData = async (context, payload) => {
-    let response = await axios.post("api/postData", payload);
-
-    return response
-}
-
-const putData = async (context, payload) => {
-    let response = await axios.put("api/putData", payload);
-
-    return response
-}
-
-const patchData = async (context, payload) => {
-    let response = await axios.patch("api/patchData", payload);
-
-    return response
+    context.commit("UPDATE_CART", response.data);
 }
 
 const deleteData = async (context, payload) => {
@@ -54,21 +35,27 @@ const decreaseQuantity = async (context, payload) => {
 };
   
   const addToCartAction = async (context, payload) => {
-    await axios.post(`api/addToCart/${payload.productId}`, {
+    console.log(`addTOCartAction kebaca sampe actions.js`)
+    await axios.post(`api/addToCartAction/${payload.productId}`, {
       quantity: payload.quantity
     });
   
     context.commit("ADD_TO_CART", payload);
   };
 
+  const deleteCart = async (context, productId) => {
+    await axios.delete(`api/deleteCart/${productId}`);
+    
+    context.commit("DELETE_CART", productId);
+};
+
+
 export default {
     increaseQuantity,
     decreaseQuantity,
     addToCartAction,
     getAllData,
-    postData,
-    putData,
-    patchData,
     deleteData,
-    getAllCart
+    getAllCart,
+    deleteCart
 }
